@@ -1,0 +1,8 @@
+.Palette {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.Palette-colors {
+  height: 90%;
+}
