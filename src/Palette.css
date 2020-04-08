@@ -7,3 +7,28 @@
 .Palette-colors {
   height: 90%;
 }
+
+.slider {
+  width: 340px;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.slider .rc-slider .rc-slider-track{
+  background-color: transparent;
+}
+
+.slider .rc-slider .rc-slider-rail{
+  height: 5px;
+}
+
+.slider .rc-slider .rc-slider-handle,
+.slider .rc-slider .rc-slider-handle:active,
+.slider .rc-slider .rc-slider-handle:hover,
+.slider .rc-slider .rc-slider-handle:focus {
+  outline: none;
+  border: 2px solid rgb(0, 221, 221);
+  background-color: white;
+  box-shadow: none;
+  transform: translateY(6%) translateX(-50%) !important;
+}
