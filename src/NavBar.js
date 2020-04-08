@@ -55,8 +55,6 @@ class NavBar extends Component {
             <MenuItem value='rgba'>RGBA - rgba(255,255,255,1.0)</MenuItem>
           </Select>
           </div>
-        </header>
-        <footer>
           <Snackbar
             autoHideDuration={2500}
             onClick={this.closeSnackbar}
@@ -64,7 +62,8 @@ class NavBar extends Component {
             anchorOrigin={{vertical:'bottom', horizontal:'left'}}
             open={this.state.snackbarOpen}
             message={<span>Format changed to {this.state.format.toUpperCase()}</span>}/>
-        </footer>
+        </header>
+
       </div>
 
     )

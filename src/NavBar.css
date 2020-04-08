@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: flex-start;
   height: 6vh;
+  background-color: lightgrey;
 }
 
 .NavBar .logo {
@@ -38,10 +39,11 @@
 }
 
 .slider .rc-slider .rc-slider-track{
-  background-color: transparent;
+  background-color: transparent
 }
 
 .slider .rc-slider .rc-slider-rail{
+  background-color: rgba(0,0,0,0.2);
   height: 5px;
 }
 
