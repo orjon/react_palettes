@@ -10,7 +10,7 @@ class NavBar extends Component {
     return(
       <header className='NavBar'>
         <div className='logo'>
-          <a href='#'>Palette</a>
+          <a href='http://www.orjon.com/'>Palettes</a>
         </div>
         <div className='slider-level'>
             LEVEL: {level}
