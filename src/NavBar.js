@@ -3,6 +3,7 @@ import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
+import { Link } from 'react-router-dom';
 import 'rc-slider/assets/index.css'; 
 // Place this before own styles!!
 import './NavBar.css';
@@ -33,7 +34,7 @@ class NavBar extends Component {
       <div>
         <header className='NavBar'>
           <div className='logo'>
-            <a href='http://www.orjon.com/'>Palettes</a>
+            <Link to='/'>Palettes</Link>
           </div>
           <div className='slider-level'>
               LEVEL: {level}
