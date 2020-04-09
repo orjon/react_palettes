@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 import { withStyles } from '@material-ui/styles';
  
 const styles = {
   root: {
-    backgroundColor: 'blue',
+    backgroundColor: 'rgb(148, 34, 120)',
     height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
@@ -21,7 +20,9 @@ const styles = {
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
-    color: 'white'
+    color: 'rgb(0, 221, 221)',
+    fontFamily: 'Gotu, sans-serif',
+    textTransform: 'uppercase'
   },
 
   palettes: {
@@ -36,6 +37,9 @@ const styles = {
 
 
 class PaletteList extends Component {
+  goToPalette(id){
+    this.props.history.push(`/palette/${id}`);
+  }
   render() {
     const {palettes, classes}= this.props;
     return(
@@ -46,7 +50,10 @@ class PaletteList extends Component {
           </nav>
           <div className={classes.palettes}>
             {palettes.map(palette => (
-              <MiniPalette {...palette}/>
+              <MiniPalette
+                {...palette}
+                handleClick={() => this.goToPalette(palette.id)}
+              />
             ))}
           </div>
         </div>
@@ -57,6 +64,3 @@ class PaletteList extends Component {
 
 export default withStyles(styles)(PaletteList);
 
-        {/* <Link to={`/palette/${palette.id}`}>
-          {palette.paletteName} {palette.emoji}
-        </Link> */}
