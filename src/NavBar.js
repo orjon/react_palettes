@@ -29,24 +29,28 @@ class NavBar extends Component {
   }
 
   render(){
-    const {level, changeLevel} = this.props
+    const {level, changeLevel, showSlider} = this.props
     return(
       <div>
         <header className='NavBar'>
           <div className='logo'>
             <Link to='/'>Palettes</Link>
           </div>
-          <div className='slider-level'>
-              LEVEL: {level}
-          </div>
-          <div className='slider'>
-            <Slider
-              defaultValue={level}
-              step={100}
-              min={100}
-              max={900}
-              onAfterChange={changeLevel}/>
-          </div>
+          {showSlider &&  
+            <div className='slider-level'>
+                LEVEL: {level}
+            </div>
+          }
+          {showSlider &&
+            <div className='slider'>
+              <Slider
+                defaultValue={level}
+                step={100}
+                min={100}
+                max={900}
+                onAfterChange={changeLevel}/>
+            </div>
+          }
           <div className='select-container'>
           <Select 
             value={this.state.format}

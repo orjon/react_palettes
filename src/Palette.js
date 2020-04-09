@@ -39,11 +39,17 @@ class Palette extends Component {
     )
     return(
       <div className='Palette'>
-        <NavBar level={level} changeLevel={this.changeLevel} handleChange={this.changeColorFormat}/>
+        <NavBar
+          showSlider={true}
+          level={level}
+          changeLevel={this.changeLevel}
+          handleChange={this.changeColorFormat}/>
         <div className='Palette-colors'>
           {colorBoxes}
         </div>
-        <footer className='Palette-footer'>{paletteName}<span className='emoji'> {emoji}</span>
+        <footer className='Palette-footer'>
+          {paletteName}
+          <span className='emoji'> {emoji}</span>
         </footer>
       </div>
     )
