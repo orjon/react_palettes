@@ -57,7 +57,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -74,12 +74,15 @@ const styles = theme => ({
 });
 
 
-
-
 class PaletteForm extends Component {
-  state = {
-    open: true,
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      open: true,
+      currentColor: 'teal',
+      paletteColors: ['red','green','orange']
+    }
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -89,8 +92,17 @@ class PaletteForm extends Component {
     this.setState({ open: false });
   };
 
+  updateCurrentColor = (newColor) => {
+    this.setState({currentColor: newColor.hex})
+  }
+
+  addNewColor = () => {
+    this.setState({paletteColors: [...this.state.paletteColors, this.state.currentColor]})
+  }
+
+
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const { open } = this.state;
 
     return (
@@ -138,10 +150,10 @@ class PaletteForm extends Component {
           </div>
 
           <ChromePicker
-            color='white'
-            onChangeComplete={(newColor) => console.log(newColor)}
+            color={this.state.currentColor}
+            onChangeComplete={this.updateCurrentColor}
           />
-          <Button variant='contained' color='primary'>Add Color</Button>
+          <Button variant='contained' color='primary' style={{backgroundColor: this.state.currentColor}} onClick={this.addNewColor}>Add Color</Button>
         </Drawer>
         <main
           className={classNames(classes.content, {
@@ -149,6 +161,10 @@ class PaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
+          <ul>
+            {this.state.paletteColors.map(color => 
+              <li style={{backgroundColor: color}} >{color}</li>)}
+          </ul>
         </main>
       </div>
     );
