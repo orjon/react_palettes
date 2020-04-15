@@ -13,6 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import Button from '@material-ui/core/Button';
+import DraggableColorbox from './DraggableColorBox';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 const drawerWidth = 400;
 
@@ -57,6 +59,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
+    height: 'calc(100vh - 64px)',
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -80,6 +83,7 @@ class PaletteForm extends Component {
     this.state = {
       open: true,
       currentColor: 'teal',
+      newName: '',
       paletteColors: ['red','green','orange']
     }
   }
@@ -98,6 +102,10 @@ class PaletteForm extends Component {
 
   addNewColor = () => {
     this.setState({paletteColors: [...this.state.paletteColors, this.state.currentColor]})
+  }
+
+  handleChange = (e) =>{
+    this.setState({newName: e.target.value})
   }
 
 
@@ -153,6 +161,9 @@ class PaletteForm extends Component {
             color={this.state.currentColor}
             onChangeComplete={this.updateCurrentColor}
           />
+          <ValidatorForm>
+            <TextValidator valie={this.state.newName} onchange={this.handleChange}/>
+          </ValidatorForm>
           <Button variant='contained' color='primary' style={{backgroundColor: this.state.currentColor}} onClick={this.addNewColor}>Add Color</Button>
         </Drawer>
         <main
@@ -161,10 +172,9 @@ class PaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          <ul>
-            {this.state.paletteColors.map(color => 
-              <li style={{backgroundColor: color}} >{color}</li>)}
-          </ul>
+          {this.state.paletteColors.map(color => 
+              <DraggableColorbox color={color}/>
+            )}
         </main>
       </div>
     );
