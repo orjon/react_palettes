@@ -14,7 +14,7 @@
 }
 
 .ColorBox.backToPalette {
-  background-color: lightgrey;
+  background-color: darkgrey;
 }
 
 .copy-button, .back-button{
@@ -37,6 +37,14 @@
   padding:0;
   cursor: pointer;
   text-decoration: none;
+}
+
+.back-button{
+  background: rgba(0,0,0,0.1);
+}
+
+.back-button:hover{
+  background: rgba(0,0,0,0.25);
 }
 
 .copy-button{

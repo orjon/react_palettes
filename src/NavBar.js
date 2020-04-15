@@ -3,10 +3,49 @@ import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
+import { withStyles } from '@material-ui/styles';
 import { Link } from 'react-router-dom';
 import 'rc-slider/assets/index.css'; 
 // Place this before own styles!!
 import './NavBar.css';
+
+const styles = {
+  NavBar: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    height: '6vh',
+    backgroundColor: 'lightgrey'
+  },
+  logo: {
+    height: '100%',
+    marginRight: '15px',
+    padding: '0 13px',
+    width: '125px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(148, 34, 120)',
+    '& a': {
+      fontFamily: 'Gotu, sans-serif',
+      textDecoration: 'none',
+      color: 'rgb(0, 221, 221)',
+      textTransform: 'uppercase',
+      fontWeight: '600',
+      fontSize: '1.5rem'
+    }
+  },
+  sliderLevel: {
+    fontSize: '0.8rem',
+  },
+  slider: {
+    width: '340px',
+    margin: '0 10px',
+    display: 'inline-block',
+  }
+}
 
 class NavBar extends Component {
   constructor(props){
@@ -29,20 +68,20 @@ class NavBar extends Component {
   }
 
   render(){
-    const {level, changeLevel, showSlider} = this.props
+    const {level, changeLevel, showSlider, classes} = this.props
     return(
       <div>
-        <header className='NavBar'>
-          <div className='logo'>
+        <header className={classes.NavBar}>
+          <div className={classes.logo}>
             <Link to='/'>Palettes</Link>
           </div>
           {showSlider &&  
-            <div className='slider-level'>
+            <div className={classes.sliderLevel}>
                 LEVEL: {level}
             </div>
           }
           {showSlider &&
-            <div className='slider'>
+            <div className={classes.slider}>
               <Slider
                 defaultValue={level}
                 step={100}
@@ -76,4 +115,4 @@ class NavBar extends Component {
   
 }
 
-export default NavBar;
+export default withStyles(styles)(NavBar);
