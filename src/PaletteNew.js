@@ -13,8 +13,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import Button from '@material-ui/core/Button';
-import DraggableColorbox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { arrayMove } from 'react-sortable-hoc';
 
 const drawerWidth = 400;
 
@@ -146,12 +147,17 @@ class PaletteForm extends Component {
     this.props.history.push('/')
   }
 
-  removeColor(colorName){
+  removeColor = (colorName) => {
     this.setState({
       paletteColors: this.state.paletteColors.filter(color => color.name !== colorName)
     })
   }
  
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState(({paletteColors}) => ({
+      paletteColors: arrayMove(paletteColors, oldIndex, newIndex)
+    }))
+  }
 
   render() {
     const { classes } = this.props;
@@ -253,12 +259,12 @@ class PaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          {this.state.paletteColors.map(color => 
-              <DraggableColorbox
-                color={color.color}
-                name={color.name}
-                handleClick={() => this.removeColor(color.name)}/>
-            )}
+          <DraggableColorList
+            paletteColors={this.state.paletteColors}
+            removeColor={this.removeColor}
+            axis='xy'
+            onSortEnd={this.onSortEnd}
+          />
         </main>
       </div>
     );
@@ -267,9 +273,3 @@ class PaletteForm extends Component {
 
 export default withStyles(styles, { withTheme: true })(PaletteForm);
 
-
-
-// PersistentDrawerLeft.propTypes = {
-//   classes: PropTypes.object.isRequired,
-//   theme: PropTypes.object.isRequired,
-// };
