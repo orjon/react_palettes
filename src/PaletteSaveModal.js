@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -46,7 +45,6 @@ class PaletteSaveModal extends Component{
 
 
   render() {
-    const { newPaletteName } = this.state
     return (
       <div>
         <Dialog
