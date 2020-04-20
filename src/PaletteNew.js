@@ -11,8 +11,7 @@ import DraggableColorList from './DraggableColorList';
 import { arrayMove } from 'react-sortable-hoc';
 import PaletteNewNav from './PaletteNewNav';
 import ColorPickerForm from './ColorPickerForm';
-
-const drawerWidth = 400;
+import {drawerWidth} from './Constants'
 
 const styles = theme => ({
   root: {
@@ -32,6 +31,7 @@ const styles = theme => ({
   },
   drawerHeader: {
     display: 'flex',
+    width: '100%',
     alignItems: 'center',
     padding: '0 8px',
     ...theme.mixins.toolbar,

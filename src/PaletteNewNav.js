@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { ChromePicker } from 'react-color';
 import Button from '@material-ui/core/Button';
-import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { arrayMove } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
 import PaletteSaveModal from './PaletteSaveModal';
+import PaletteIcon from '@material-ui/icons/Palette';
+import {drawerWidth} from './Constants'
 
-const drawerWidth = 400;
 
 const styles = theme => ({
   root: {
@@ -103,14 +97,14 @@ class PaletteNewNav extends Component {
           })}
         >
           <Toolbar disableGutters={!open}>
-            <IconButton
+            {!open && (<IconButton
               color="inherit"
               aria-label="Open drawer"
               onClick={this.props.handleDrawerOpen}
               className={classNames(classes.menuButton, open && classes.hide)}
             >
-              <MenuIcon />
-            </IconButton>
+              <PaletteIcon />
+            </IconButton>)}
             <Typography variant="h6" color="inherit" noWrap>
               Create New Palette
             </Typography>
