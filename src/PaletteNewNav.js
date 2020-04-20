@@ -16,6 +16,7 @@ import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
+import PaletteSaveModal from './PaletteSaveModal';
 
 const drawerWidth = 400;
 
@@ -29,7 +30,8 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -44,15 +46,22 @@ const styles = theme => ({
     marginRight: 20,
   },
   navButtons: {
-
+    marginRight: '1rem',
+    '& a': {
+      textDecoration: 'none'
+    }
+  },
+  button: {
+    margin: '0 0.5rem'
   }
+
 });
 
 class PaletteNewNav extends Component {
   constructor(props){
     super(props);
     this.state ={
-      newPaletteName: '',
+      showSaveForm: false
     }
   }
 
@@ -67,14 +76,22 @@ class PaletteNewNav extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value})
+      [e.target.name]: e.target.value,
+      saveFormOpen : false
+    })
   }
 
+  showSaveForm = () =>{
+    this.setState({saveFormOpen: true})
+  }
+
+  hideSaveForm = () =>{
+    this.setState({saveFormOpen: false})
+  }
 
 
   render() {
     const { classes, open} = this.props
-    const { newPaletteName } = this.state
     return(
       <div>
         <CssBaseline />
@@ -99,27 +116,26 @@ class PaletteNewNav extends Component {
             </Typography>
           </Toolbar>
           <div className={classes.navButtons}>
-              <ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
-                <TextValidator
-                  label='Palette Name'
-                  name='newPaletteName'
-                  value={this.state.newPaletteName}
-                  onChange={this.handleChange}
-                  validators={['required', 'paletteNameUnique']}
-                  errorMessages={['Enter palette name', 'Palette name must be unique']}
-                />
-
-                <Button variant='contained' color='primary' type='submit'>
-                Save Palette
-                </Button>
-              </ValidatorForm>
-              <Link to='/'>
-                  <Button variant='contained' color='secondary'>
-                    Back to Palettes
-                  </Button>
-                </Link>
-            </div>
+            <Link to='/'>
+              <Button
+                variant='contained'
+                color='secondary'
+                className={classes.button}>
+                  Back to Palettes
+              </Button>
+            </Link>
+            <Button
+              variant='contained'
+              color="primary"
+              onClick={this.showSaveForm}
+              className={classes.button}>
+              Save Palette
+            </Button>
+          </div>
         </AppBar>
+        {this.state.saveFormOpen && (
+          <PaletteSaveModal handleSubmit={this.props.handleSubmit} hideSaveForm={this.hideSaveForm}/>
+        )}
       </div>
     )
   }
